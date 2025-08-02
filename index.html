@@ -364,18 +364,19 @@
         text-align: center;
       }
       .photo-image {
-        width: 100%;
-        height: 70%;
-        object-fit: cover;
-        border-radius: 15px;
-        margin-bottom: 1rem;
-        transition: all 0.3s ease;
-      }
-      .photo-image:hover {
-        transform: scale(1.02);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-      }
+    width: 100%;
+    height: 70%;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
 
+.photo-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
       /* Heart explosion section */
       .heart-section {
         text-align: center;
@@ -396,6 +397,57 @@
         margin: 2rem;
       }
 
+       /* Add these new styles to your existing style section */
+      .gift-box {
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .gift-photo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: white;
+        border-radius: 20px;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transform: scale(0);
+        opacity: 0;
+        transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      }
+      
+      .gift-photo img {
+        width: 100%;
+        height: 70%;
+        object-fit: cover;
+        border-radius: 15px;
+        margin-bottom: 10px;
+      }
+      
+      .gift-photo .photo-caption {
+        font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+        color: #333;
+        font-weight: 500;
+        text-align: center;
+      }
+      
+      .gift-box.open .gift-photo {
+        transform: scale(1);
+        opacity: 1;
+      }
+      
+      .gift-box.open .gift-icon {
+        opacity: 0;
+      }
+      
+      .gift-box.open {
+        background: white !important;
+      }
       .main-heart {
         font-size: clamp(4rem, 10vw, 8rem);
         color: #ff006e;
@@ -762,30 +814,56 @@
 
       <!-- Interactive gifts -->
       <div class="gifts-container" id="giftsContainer">
-        <div class="gift-box" data-gift="love">
-          <div class="gift-icon">💖</div>
+        <div class="gift-box" data-gift="family">
+          <div class="gift-icon">👨‍👩‍👧‍👦</div>
+          <div class="gift-photo">
+            <img src="images/1.JPG" alt="Our Amazing Family">
+            <p class="photo-caption">Our Amazing Family</p>
+          </div>
         </div>
         <div class="gift-box" data-gift="cake">
           <div class="gift-icon">🎂</div>
+          <div class="gift-photo">
+            <img src="images/2.JPG" alt="Birthday Celebrations">
+            <p class="photo-caption">Birthday Celebrations</p>
+          </div>
         </div>
         <div class="gift-box" data-gift="flowers">
           <div class="gift-icon">🌺</div>
+          <div class="gift-photo">
+            <img src="images/3.jpg" alt="Special Moments">
+            <p class="photo-caption">Special Moments</p>
+          </div>
         </div>
-        <div class="gift-box" data-gift="music">
-          <div class="gift-icon">🎵</div>
+        <div class="gift-box" data-gift="vacation">
+          <div class="gift-icon">✈️</div>
+          <div class="gift-photo">
+            <img src="images/4.jpg" alt="Love & Laughter">
+            <p class="photo-caption">Love & Laughter</p>
+          </div>
         </div>
-        <div class="gift-box" data-gift="star">
-          <div class="gift-icon">⭐</div>
+        <div class="gift-box" data-gift="love">
+          <div class="gift-icon">💖</div>
+          <div class="gift-photo">
+            <img src="images/5.jpg" alt="Beautiful Memories">
+            <p class="photo-caption">Beautiful Memories</p>
+          </div>
         </div>
         <div class="gift-box" data-gift="surprise">
           <div class="gift-icon">🎁</div>
+          <div class="gift-photo">
+            <img src="images/6.jpg" alt="Happy Times">
+            <p class="photo-caption">Happy Times</p>
+          </div>
         </div>
       </div>
 
       <!-- Photo memories -->
       <div class="memories-section" id="memoriesSection">
         <h2 class="memories-title">Beautiful Memories 📸</h2>
-        <div class="photo-carousel">
+        <!-- <div class="photo-carousel">
+
+
           <div class="photo-frame">
             <img src="images/1.jpg" />
             <p class="photo-caption">Our Amazing Family</p>
@@ -802,7 +880,58 @@
             <div class="photo-placeholder">💕</div>
             <p class="photo-caption">Love & Laughter</p>
           </div>
-        </div>
+        </div> -->
+
+        <div class="photo-carousel">
+    <div class="photo-frame">
+        <img src="images/1.JPG" alt="Our Amazing Family" class="photo-image">
+        <p class="photo-caption">Our Amazing Family</p>
+    </div>
+    <div class="photo-frame">
+        <img src="images/2.JPG" alt="Birthday Celebrations" class="photo-image">
+        <p class="photo-caption">Birthday Celebrations</p>
+    </div>
+    <div class="photo-frame">
+        <img src="images/3.jpg" alt="Special Moments" class="photo-image">
+        <p class="photo-caption">Special Moments</p>
+    </div>
+    <div class="photo-frame">
+        <img src="images/4.jpg" alt="Love & Laughter" class="photo-image">
+        <p class="photo-caption">Love & Laughter</p>
+    </div>
+    <div class="photo-frame">
+        <img src="images/5.jpg" alt="Beautiful Memories" class="photo-image">
+        <p class="photo-caption">Beautiful Memories</p>
+    </div>
+    <div class="photo-frame">
+        <img src="images/6.jpg" alt="Happy Times" class="photo-image">
+        <p class="photo-caption">Happy Times</p>
+    </div>
+    <div class="photo-frame">
+        <img src="images/7.jpg" alt="Sweet Moments" class="photo-image">
+        <p class="photo-caption">Sweet Moments</p>
+    </div>
+    <div class="photo-frame">
+        <img src="images/8.jpg" alt="Cherished Times" class="photo-image">
+        <p class="photo-caption">Cherished Times</p>
+    </div>
+    <div class="photo-frame">
+        <img src="images/9.jpg" alt="Cherished Times" class="photo-image">
+        <p class="photo-caption">Cherished Times</p>
+    </div><div class="photo-frame">
+        <img src="images/10.jpg" alt="Cherished Times" class="photo-image">
+        <p class="photo-caption">Cherished Times</p>
+    </div><div class="photo-frame">
+        <img src="images/11.jpg" alt="Cherished Times" class="photo-image">
+        <p class="photo-caption">Cherished Times</p>
+    </div><div class="photo-frame">
+        <img src="images/12.jpg" alt="Cherished Times" class="photo-image">
+        <p class="photo-caption">Cherished Times</p>
+    </div><div class="photo-frame">
+        <img src="images/13.jpg" alt="Cherished Times" class="photo-image">
+        <p class="photo-caption">Cherished Times</p>
+    
+</div>
       </div>
 
       <!-- Heart explosion -->
@@ -1248,6 +1377,56 @@
             }
         `;
       document.head.appendChild(dynamicStyles);
+      
+      // [Previous JavaScript remains the same until the gift box interactions]
+
+      // Step 3: Open gifts - Updated to reveal photos inside gifts
+      document.getElementById("giftsBtn").addEventListener("click", function () {
+        const giftsContainer = document.getElementById("giftsContainer");
+        giftsContainer.classList.add("show");
+
+        // Add gift box interactions
+        const giftBoxes = document.querySelectorAll(".gift-box");
+        
+        giftBoxes.forEach((box, index) => {
+          setTimeout(() => {
+            box.style.animation = "bounceIn 0.8s ease-out";
+
+            box.addEventListener("click", function () {
+              // Close any other open gifts
+              document.querySelectorAll('.gift-box.open').forEach(openBox => {
+                if (openBox !== this) {
+                  openBox.classList.remove('open');
+                  openBox.style.transform = "";
+                }
+              });
+              
+              // Toggle this gift
+              this.classList.toggle('open');
+              
+              // Add special effects when opening
+              if (this.classList.contains('open')) {
+                this.style.transform = "scale(1.1) rotateY(360deg)";
+                
+                // Create mini fireworks from the gift
+                const rect = this.getBoundingClientRect();
+                createMiniFireworks(
+                  rect.left + rect.width / 2,
+                  rect.top + rect.height / 2
+                );
+              } else {
+                this.style.transform = "";
+              }
+            });
+          }, index * 200);
+        });
+
+        this.disabled = true;
+        this.style.background = "linear-gradient(45deg, #ffb700, #f0932b)";
+        showNextButton();
+      });
+
+      // [Rest of the JavaScript remains the same]
     </script>
   </body>
 </html>
