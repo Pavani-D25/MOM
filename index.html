@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎂 Mom's Special Day 🎂</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&family=Poppins:wght@300;400;500;600;700&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: radial-gradient(
+          circle at 50% 50%,
+          #ff9a56 0%,
+          #ffad56 25%,
+          #c850c0 50%,
+          #4158d0 100%
+        );
+        min-height: 100vh;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      /* Floating emojis background */
+      .emoji-rain {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .floating-emoji {
+        position: absolute;
+        font-size: clamp(20px, 4vw, 30px);
+        animation: emojiDrop 8s linear infinite;
+        opacity: 0.8;
+      }
+
+      @keyframes emojiDrop {
+        0% {
+          transform: translateY(-100vh) rotate(0deg) scale(0.5);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.8;
+        }
+        90% {
+          opacity: 0.8;
+        }
+        100% {
+          transform: translateY(100vh) rotate(360deg) scale(1.2);
+          opacity: 0;
+        }
+      }
+
+      /* Initial splash screen */
+      .splash-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, #ff006e, #ff5e5b, #ffb700, #06ffa5);
+        background-size: 300% 300%;
+        animation: rainbowShift 2s ease-in-out infinite;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      .splash-screen.fade-out {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+
+      @keyframes rainbowShift {
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+      }
+
+      .splash-title {
+        font-family: "Fredoka One", cursive;
+        font-size: clamp(2rem, 8vw, 4rem);
+        color: white;
+        text-align: center;
+        margin-bottom: 2rem;
+        text-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+        animation: bounceIn 2s ease-out;
+      }
+
+      .splash-subtitle {
+        font-size: clamp(1rem, 3vw, 1.5rem);
+        color: rgba(255, 255, 255, 0.9);
+        text-align: center;
+        animation: slideUp 2s ease-out;
+        max-width: 90%;
+      }
+
+      @keyframes bounceIn {
+        0% {
+          transform: scale(0) rotate(-180deg);
+          opacity: 0;
+        }
+        50% {
+          transform: scale(1.2) rotate(-90deg);
+        }
+        100% {
+          transform: scale(1) rotate(0deg);
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideUp {
+        0% {
+          transform: translateY(50px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      /* Main container */
+      .main-container {
+        display: none;
+        min-height: 100vh;
+        padding: 2rem 1rem;
+        position: relative;
+        z-index: 10;
+      }
+
+      .main-container.active {
+        display: block;
+        animation: mainAppear 2s ease-out;
+      }
+
+      @keyframes mainAppear {
+        0% {
+          opacity: 0;
+          transform: translateY(100px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Header section */
+      .header-section {
+        text-align: center;
+        margin-bottom: 3rem;
+        transform: translateY(-50px);
+        opacity: 0;
+        transition: all 1.5s ease;
+      }
+
+      .header-section.reveal {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .birthday-title {
+        font-family: "Fredoka One", cursive;
+        font-size: clamp(2.5rem, 7vw, 5rem);
+        background: linear-gradient(45deg, #ff006e, #ffb700, #06ffa5, #4cc9f0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1rem;
+        text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        animation: titleGlow 3s ease-in-out infinite;
+      }
+
+      @keyframes titleGlow {
+        0%,
+        100% {
+          filter: brightness(1) saturate(1);
+        }
+        50% {
+          filter: brightness(1.3) saturate(1.5);
+        }
+      }
+
+      .birthday-subtitle {
+        font-size: clamp(1.2rem, 3.5vw, 2rem);
+        color: white;
+        font-weight: 500;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Interactive gift boxes */
+      .gifts-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: clamp(1rem, 3vw, 2rem);
+        max-width: 800px;
+        margin: 0 auto 3rem;
+        padding: 0 1rem;
+        opacity: 0;
+        transform: scale(0.8);
+        transition: all 1.5s ease;
+      }
+
+      .gifts-container.show {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .gift-box {
+        width: 100%;
+        aspect-ratio: 1;
+        background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+        border-radius: 20px;
+        position: relative;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+      }
+
+      .gift-box:hover {
+        transform: translateY(-10px) rotateY(15deg);
+        box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3);
+      }
+
+      .gift-box::before {
+        content: "";
+        position: absolute;
+        top: 45%;
+        left: 0;
+        width: 100%;
+        height: 10%;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 5px;
+      }
+
+      .gift-box::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 45%;
+        width: 10%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 5px;
+      }
+
+      .gift-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: clamp(2rem, 5vw, 3rem);
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+      }
+
+      .gift-box:nth-child(1) {
+        background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+        animation-delay: 0.1s;
+      }
+      .gift-box:nth-child(2) {
+        background: linear-gradient(135deg, #4ecdc4, #44a08d);
+        animation-delay: 0.2s;
+      }
+      .gift-box:nth-child(3) {
+        background: linear-gradient(135deg, #45b7d1, #2980b9);
+        animation-delay: 0.3s;
+      }
+      .gift-box:nth-child(4) {
+        background: linear-gradient(135deg, #f9ca24, #f0932b);
+        animation-delay: 0.4s;
+      }
+      .gift-box:nth-child(5) {
+        background: linear-gradient(135deg, #a8e6cf, #7fcdcd);
+        animation-delay: 0.5s;
+      }
+      .gift-box:nth-child(6) {
+        background: linear-gradient(135deg, #ff9ff3, #f368e0);
+        animation-delay: 0.6s;
+      }
+
+      /* Photo memories section */
+      .memories-section {
+        margin: 4rem 0;
+        text-align: center;
+        opacity: 0;
+        transform: translateX(-100px);
+        transition: all 1.5s ease;
+      }
+
+      .memories-section.slide-in {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .memories-title {
+        font-family: "Fredoka One", cursive;
+        font-size: clamp(2rem, 5vw, 3rem);
+        color: white;
+        margin-bottom: 2rem;
+        text-shadow: 0 3px 15px rgba(0, 0, 0, 0.4);
+      }
+
+      .photo-carousel {
+        display: flex;
+        gap: 1rem;
+        overflow-x: auto;
+        padding: 1rem;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .photo-frame {
+        min-width: clamp(200px, 40vw, 300px);
+        height: clamp(250px, 50vw, 350px);
+        background: white;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        scroll-snap-align: center;
+        position: relative;
+        cursor: pointer;
+        transition: all 0.4s ease;
+      }
+
+      .photo-frame:hover {
+        transform: scale(1.05) rotate(2deg);
+      }
+
+      .photo-placeholder {
+        width: 100%;
+        height: 70%;
+        background: linear-gradient(45deg, #ff9a9e, #fecfef, #fecfef, #fad0c4);
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: clamp(3rem, 6vw, 4rem);
+        margin-bottom: 1rem;
+      }
+
+      .photo-caption {
+        font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+        color: #333;
+        font-weight: 500;
+        text-align: center;
+      }
+      .photo-image {
+        width: 100%;
+        height: 70%;
+        object-fit: cover;
+        border-radius: 15px;
+        margin-bottom: 1rem;
+        transition: all 0.3s ease;
+      }
+      .photo-image:hover {
+        transform: scale(1.02);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Heart explosion section */
+      .heart-section {
+        text-align: center;
+        margin: 4rem 0;
+        opacity: 0;
+        transform: scale(0.5);
+        transition: all 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      }
+
+      .heart-section.explode {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .heart-container {
+        position: relative;
+        display: inline-block;
+        margin: 2rem;
+      }
+
+      .main-heart {
+        font-size: clamp(4rem, 10vw, 8rem);
+        color: #ff006e;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        animation: heartbeat 2s ease-in-out infinite;
+        filter: drop-shadow(0 0 20px rgba(255, 0, 110, 0.5));
+      }
+
+      .main-heart:hover {
+        transform: scale(1.2);
+        filter: drop-shadow(0 0 30px rgba(255, 0, 110, 0.8));
+      }
+
+      @keyframes heartbeat {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+      }
+
+      .floating-hearts {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .mini-heart {
+        position: absolute;
+        font-size: 1.5rem;
+        color: #ff006e;
+        opacity: 0;
+        animation: heartFloat 3s ease-out infinite;
+      }
+
+      @keyframes heartFloat {
+        0% {
+          opacity: 1;
+          transform: translate(0, 0) scale(0.5);
+        }
+        100% {
+          opacity: 0;
+          transform: translate(var(--x), var(--y)) scale(1.5);
+        }
+      }
+
+      /* Message reveal */
+      .message-container {
+        max-width: 600px;
+        margin: 4rem auto;
+        padding: 0 1rem;
+        opacity: 0;
+        transform: translateY(100px);
+        transition: all 1.5s ease;
+      }
+
+      .message-container.reveal {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .message-card {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(20px);
+        border-radius: 25px;
+        padding: clamp(2rem, 5vw, 3rem);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .message-card::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: conic-gradient(
+          from 0deg,
+          transparent,
+          rgba(255, 255, 255, 0.1),
+          transparent
+        );
+        animation: shimmer 3s linear infinite;
+      }
+
+      @keyframes shimmer {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .message-text {
+        position: relative;
+        z-index: 2;
+        font-size: clamp(1.1rem, 3vw, 1.4rem);
+        line-height: 1.8;
+        color: white;
+        text-align: center;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 1s ease;
+      }
+
+      .message-text.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Control panel */
+      .control-panel {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: clamp(0.5rem, 2vw, 1rem);
+        z-index: 100;
+        flex-wrap: wrap;
+        justify-content: center;
+        max-width: 95%;
+      }
+
+      .control-btn {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(15px);
+        border: none;
+        border-radius: 50px;
+        padding: clamp(0.8rem, 2.5vw, 1rem) clamp(1.2rem, 3vw, 1.8rem);
+        color: white;
+        font-weight: 600;
+        font-size: clamp(0.8rem, 2.2vw, 1rem);
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        display: none;
+        white-space: nowrap;
+      }
+
+      .control-btn.active {
+        display: block;
+        animation: btnPop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      }
+
+      @keyframes btnPop {
+        0% {
+          transform: scale(0) rotate(-180deg);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(1) rotate(0deg);
+          opacity: 1;
+        }
+      }
+
+      .control-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .control-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: scale(0.95);
+      }
+
+      /* Audio visualizer */
+      .audio-visualizer {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        display: none;
+        align-items: end;
+        gap: 3px;
+        background: rgba(0, 0, 0, 0.3);
+        padding: 15px;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+      }
+
+      .audio-visualizer.playing {
+        display: flex;
+        animation: visualizerSlide 1s ease;
+      }
+
+      @keyframes visualizerSlide {
+        0% {
+          transform: translateX(-100px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      .audio-bar {
+        width: 5px;
+        height: 20px;
+        background: linear-gradient(to top, #ff006e, #ffb700);
+        border-radius: 3px;
+        animation: audioWave 1s ease-in-out infinite;
+      }
+
+      .audio-bar:nth-child(1) {
+        animation-delay: 0s;
+      }
+      .audio-bar:nth-child(2) {
+        animation-delay: 0.1s;
+      }
+      .audio-bar:nth-child(3) {
+        animation-delay: 0.2s;
+      }
+      .audio-bar:nth-child(4) {
+        animation-delay: 0.3s;
+      }
+      .audio-bar:nth-child(5) {
+        animation-delay: 0.4s;
+      }
+      .audio-bar:nth-child(6) {
+        animation-delay: 0.5s;
+      }
+      .audio-bar:nth-child(7) {
+        animation-delay: 0.6s;
+      }
+
+      @keyframes audioWave {
+        0%,
+        100% {
+          height: 20px;
+          background: linear-gradient(to top, #ff006e, #ffb700);
+        }
+        50% {
+          height: 50px;
+          background: linear-gradient(to top, #06ffa5, #4cc9f0);
+        }
+      }
+
+      /* Fireworks effect */
+      .fireworks-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1000;
+      }
+
+      .firework {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        animation: fireworkExplode 2s ease-out infinite;
+      }
+
+      @keyframes fireworkExplode {
+        0% {
+          transform: scale(0) rotate(0deg);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1) rotate(180deg);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(0) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      /* Mobile optimizations */
+      @media (max-width: 768px) {
+        .gifts-container {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1rem;
+        }
+
+        .photo-carousel {
+          gap: 0.5rem;
+          padding: 0.5rem;
+        }
+
+        .control-panel {
+          gap: 0.5rem;
+          bottom: 10px;
+        }
+
+        .audio-visualizer {
+          top: 10px;
+          left: 10px;
+          padding: 10px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .main-container {
+          padding: 1rem 0.5rem;
+        }
+
+        .gifts-container {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 0.8rem;
+          padding: 0 0.5rem;
+        }
+
+        .control-panel {
+          flex-direction: column;
+          align-items: center;
+          gap: 0.5rem;
+          max-width: 90%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Floating emoji background -->
+    <div class="emoji-rain" id="emojiRain"></div>
+
+    <!-- Splash screen -->
+    <div class="splash-screen" id="splashScreen">
+      <h1 class="splash-title">🎉 Surprise! 🎉</h1>
+      <p class="splash-subtitle">
+        Something magical is coming for the most amazing mom...
+      </p>
+    </div>
+
+    <!-- Fireworks container -->
+    <div class="fireworks-container" id="fireworksContainer"></div>
+
+    <!-- Audio visualizer -->
+    <div class="audio-visualizer" id="audioVisualizer">
+      <div class="audio-bar"></div>
+      <div class="audio-bar"></div>
+      <div class="audio-bar"></div>
+      <div class="audio-bar"></div>
+      <div class="audio-bar"></div>
+      <div class="audio-bar"></div>
+      <div class="audio-bar"></div>
+    </div>
+
+    <!-- Main content -->
+    <div class="main-container" id="mainContainer">
+      <!-- Header -->
+      <div class="header-section" id="headerSection">
+        <h1 class="birthday-title">Happy Birthday Mom!</h1>
+        <p class="birthday-subtitle">🌟 You make every day brighter! 🌟</p>
+      </div>
+
+      <!-- Interactive gifts -->
+      <div class="gifts-container" id="giftsContainer">
+        <div class="gift-box" data-gift="love">
+          <div class="gift-icon">💖</div>
+        </div>
+        <div class="gift-box" data-gift="cake">
+          <div class="gift-icon">🎂</div>
+        </div>
+        <div class="gift-box" data-gift="flowers">
+          <div class="gift-icon">🌺</div>
+        </div>
+        <div class="gift-box" data-gift="music">
+          <div class="gift-icon">🎵</div>
+        </div>
+        <div class="gift-box" data-gift="star">
+          <div class="gift-icon">⭐</div>
+        </div>
+        <div class="gift-box" data-gift="surprise">
+          <div class="gift-icon">🎁</div>
+        </div>
+      </div>
+
+      <!-- Photo memories -->
+      <div class="memories-section" id="memoriesSection">
+        <h2 class="memories-title">Beautiful Memories 📸</h2>
+        <div class="photo-carousel">
+          <div class="photo-frame">
+            <img src="images/1.jpg" />
+            <p class="photo-caption">Our Amazing Family</p>
+          </div>
+          <div class="photo-frame">
+            <div class="photo-placeholder">🎂</div>
+            <p class="photo-caption">Birthday Celebrations</p>
+          </div>
+          <div class="photo-frame">
+            <div class="photo-placeholder">🌹</div>
+            <p class="photo-caption">Special Moments</p>
+          </div>
+          <div class="photo-frame">
+            <div class="photo-placeholder">💕</div>
+            <p class="photo-caption">Love & Laughter</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Heart explosion -->
+      <div class="heart-section" id="heartSection">
+        <div class="heart-container">
+          <div class="main-heart" id="mainHeart">❤️</div>
+          <div class="floating-hearts" id="floatingHearts"></div>
+        </div>
+      </div>
+
+      <!-- Special message -->
+      <div class="message-container" id="messageContainer">
+        <div class="message-card">
+          <p class="message-text">Dear Mom,</p>
+          <p class="message-text">
+            Today we celebrate YOU - the most wonderful person in our lives!
+          </p>
+          <p class="message-text">
+            Your love, warmth, and endless hugs make every day special.
+          </p>
+          <p class="message-text">
+            Thank you for being our superhero, our guide, and our best friend.
+          </p>
+          <p class="message-text">
+            May this new year bring you all the happiness you deserve!
+          </p>
+          <p class="message-text">We love you more than words can say! 💕</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Control panel -->
+    <div class="control-panel">
+      <button class="control-btn active" id="startBtn">
+        🎵 Start the Magic
+      </button>
+      <button class="control-btn" id="revealBtn">✨ Grand Reveal</button>
+      <button class="control-btn" id="giftsBtn">🎁 Open Gifts</button>
+      <button class="control-btn" id="memoriesBtn">📸 Show Memories</button>
+      <button class="control-btn" id="heartBtn">💖 Send Love</button>
+      <button class="control-btn" id="messageBtn">💌 Special Message</button>
+      <button class="control-btn" id="celebrateBtn">🎉 Celebrate!</button>
+    </div>
+
+    <script>
+      // State management
+      let currentStep = 0;
+      const steps = [
+        "startBtn",
+        "revealBtn",
+        "giftsBtn",
+        "memoriesBtn",
+        "heartBtn",
+        "messageBtn",
+        "celebrateBtn",
+      ];
+      let musicPlaying = false;
+
+      // Create floating emojis
+      function createEmojiRain() {
+        const emojiRain = document.getElementById("emojiRain");
+        const emojis = [
+          "🎂",
+          "🎉",
+          "🎈",
+          "🌟",
+          "💖",
+          "🌸",
+          "🦋",
+          "✨",
+          "🎵",
+          "🌺",
+        ];
+
+        setInterval(() => {
+          const emoji = document.createElement("div");
+          emoji.className = "floating-emoji";
+          emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+          emoji.style.left = Math.random() * 100 + "%";
+          emoji.style.animationDuration = Math.random() * 3 + 5 + "s";
+          emoji.style.animationDelay = Math.random() * 2 + "s";
+          emojiRain.appendChild(emoji);
+
+          setTimeout(() => emoji.remove(), 8000);
+        }, 800);
+      }
+
+      // Create fireworks effect
+      function createFireworks() {
+        const fireworksContainer =
+          document.getElementById("fireworksContainer");
+        const colors = ["#ff006e", "#ffb700", "#06ffa5", "#4cc9f0", "#ff5e5b"];
+
+        for (let i = 0; i < 50; i++) {
+          const firework = document.createElement("div");
+          firework.className = "firework";
+          firework.style.left = Math.random() * 100 + "%";
+          firework.style.top = Math.random() * 100 + "%";
+          firework.style.backgroundColor =
+            colors[Math.floor(Math.random() * colors.length)];
+          firework.style.animationDelay = Math.random() * 2 + "s";
+          firework.style.animationDuration = Math.random() * 1 + 1.5 + "s";
+          fireworksContainer.appendChild(firework);
+        }
+
+        setTimeout(() => {
+          fireworksContainer.innerHTML = "";
+        }, 4000);
+      }
+
+      // Initialize app
+      setTimeout(() => {
+        document.getElementById("splashScreen").classList.add("fade-out");
+        setTimeout(() => {
+          document.getElementById("splashScreen").style.display = "none";
+          document.getElementById("mainContainer").classList.add("active");
+          createEmojiRain();
+        }, 1500);
+      }, 3500);
+
+      // Step 1: Start the magic
+      document
+        .getElementById("startBtn")
+        .addEventListener("click", function () {
+          document.getElementById("audioVisualizer").classList.add("playing");
+          document.body.style.animation =
+            "rainbowShift 3s ease-in-out infinite";
+          musicPlaying = true;
+
+          this.disabled = true;
+          this.style.background = "linear-gradient(45deg, #06ffa5, #4cc9f0)";
+          showNextButton();
+        });
+
+      // Step 2: Grand reveal
+      document
+        .getElementById("revealBtn")
+        .addEventListener("click", function () {
+          document.getElementById("headerSection").classList.add("reveal");
+          createFireworks();
+
+          this.disabled = true;
+          this.style.background = "linear-gradient(45deg, #ff006e, #ff5e5b)";
+          showNextButton();
+        });
+
+      // Step 3: Open gifts
+      document
+        .getElementById("giftsBtn")
+        .addEventListener("click", function () {
+          const giftsContainer = document.getElementById("giftsContainer");
+          giftsContainer.classList.add("show");
+
+          // Add gift box interactions
+          const giftBoxes = document.querySelectorAll(".gift-box");
+          giftBoxes.forEach((box, index) => {
+            setTimeout(() => {
+              box.style.animation = "bounceIn 0.8s ease-out";
+
+              box.addEventListener("click", function () {
+                this.style.transform = "scale(1.2) rotateY(360deg)";
+                this.style.background =
+                  "linear-gradient(135deg, #ffb700, #06ffa5)";
+
+                // Create mini fireworks from the gift
+                const rect = this.getBoundingClientRect();
+                createMiniFireworks(
+                  rect.left + rect.width / 2,
+                  rect.top + rect.height / 2
+                );
+
+                setTimeout(() => {
+                  this.style.transform = "";
+                }, 600);
+              });
+            }, index * 200);
+          });
+
+          this.disabled = true;
+          this.style.background = "linear-gradient(45deg, #ffb700, #f0932b)";
+          showNextButton();
+        });
+
+      // Step 4: Show memories
+      document
+        .getElementById("memoriesBtn")
+        .addEventListener("click", function () {
+          document.getElementById("memoriesSection").classList.add("slide-in");
+
+          // Add photo frame interactions
+          const photoFrames = document.querySelectorAll(".photo-frame");
+          photoFrames.forEach((frame, index) => {
+            setTimeout(() => {
+              frame.addEventListener("click", function () {
+                this.style.transform = "scale(1.1) rotate(-2deg)";
+                this.style.boxShadow = "0 30px 60px rgba(0,0,0,0.4)";
+
+                setTimeout(() => {
+                  this.style.transform = "";
+                  this.style.boxShadow = "0 20px 40px rgba(0,0,0,0.2)";
+                }, 800);
+              });
+            }, index * 300);
+          });
+
+          this.disabled = true;
+          this.style.background = "linear-gradient(45deg, #a8e6cf, #7fcdcd)";
+          showNextButton();
+        });
+
+      // Step 5: Send love (heart explosion)
+      document
+        .getElementById("heartBtn")
+        .addEventListener("click", function () {
+          const heartSection = document.getElementById("heartSection");
+          heartSection.classList.add("explode");
+
+          // Add heart click interaction
+          const mainHeart = document.getElementById("mainHeart");
+          mainHeart.addEventListener("click", function () {
+            createHeartExplosion();
+            this.style.animation = "heartbeat 0.5s ease-in-out 3";
+          });
+
+          this.disabled = true;
+          this.style.background = "linear-gradient(45deg, #ff006e, #ff9ff3)";
+          showNextButton();
+        });
+
+      // Step 6: Special message
+      document
+        .getElementById("messageBtn")
+        .addEventListener("click", function () {
+          const messageContainer = document.getElementById("messageContainer");
+          const messageTexts = document.querySelectorAll(".message-text");
+
+          messageContainer.classList.add("reveal");
+
+          messageTexts.forEach((text, index) => {
+            setTimeout(() => {
+              text.classList.add("show");
+            }, index * 800);
+          });
+
+          this.disabled = true;
+          this.style.background = "linear-gradient(45deg, #4cc9f0, #667eea)";
+          showNextButton();
+        });
+
+      // Step 7: Grand celebration
+      document
+        .getElementById("celebrateBtn")
+        .addEventListener("click", function () {
+          // Ultimate celebration sequence
+          createFireworks();
+          setTimeout(() => createFireworks(), 1000);
+          setTimeout(() => createFireworks(), 2000);
+
+          // Change background to party mode
+          document.body.style.background =
+            "linear-gradient(45deg, #ff006e, #ffb700, #06ffa5, #4cc9f0, #ff5e5b)";
+          document.body.style.backgroundSize = "300% 300%";
+          document.body.style.animation =
+            "rainbowShift 1s ease-in-out infinite";
+
+          // Make everything dance
+          const allElements = document.querySelectorAll(
+            ".gift-box, .photo-frame, .main-heart"
+          );
+          allElements.forEach((element, index) => {
+            setTimeout(() => {
+              element.style.animation = "bounceIn 1s ease-in-out infinite";
+            }, index * 100);
+          });
+
+          // Show celebration alert
+          setTimeout(() => {
+            alert(
+              "🎉 HAPPY BIRTHDAY MOM! 🎉\n\nYou are the most amazing person in the world!\nWe love you so much! 💖✨"
+            );
+          }, 2000);
+
+          this.disabled = true;
+          this.style.background =
+            "linear-gradient(45deg, #ff006e, #ffb700, #06ffa5)";
+          this.style.backgroundSize = "200% 200%";
+          this.style.animation = "rainbowShift 0.8s ease-in-out infinite";
+        });
+
+      // Helper functions
+      function showNextButton() {
+        currentStep++;
+        if (currentStep < steps.length) {
+          const nextBtn = document.getElementById(steps[currentStep]);
+          setTimeout(() => {
+            nextBtn.classList.add("active");
+          }, 1500);
+        }
+      }
+
+      function createMiniFireworks(x, y) {
+        const colors = ["#ff006e", "#ffb700", "#06ffa5", "#4cc9f0"];
+        for (let i = 0; i < 10; i++) {
+          const spark = document.createElement("div");
+          spark.style.position = "fixed";
+          spark.style.left = x + "px";
+          spark.style.top = y + "px";
+          spark.style.width = "4px";
+          spark.style.height = "4px";
+          spark.style.borderRadius = "50%";
+          spark.style.backgroundColor =
+            colors[Math.floor(Math.random() * colors.length)];
+          spark.style.pointerEvents = "none";
+          spark.style.zIndex = "999";
+
+          const angle = (i / 10) * Math.PI * 2;
+          const distance = 50 + Math.random() * 50;
+          const finalX = x + Math.cos(angle) * distance;
+          const finalY = y + Math.sin(angle) * distance;
+
+          spark.style.transition = "all 1s ease-out";
+          document.body.appendChild(spark);
+
+          setTimeout(() => {
+            spark.style.left = finalX + "px";
+            spark.style.top = finalY + "px";
+            spark.style.opacity = "0";
+            spark.style.transform = "scale(0)";
+          }, 50);
+
+          setTimeout(() => spark.remove(), 1000);
+        }
+      }
+
+      function createHeartExplosion() {
+        const floatingHearts = document.getElementById("floatingHearts");
+        const heartEmojis = [
+          "💖",
+          "💕",
+          "💗",
+          "💓",
+          "💝",
+          "❤️",
+          "🧡",
+          "💛",
+          "💚",
+          "💙",
+          "💜",
+        ];
+
+        for (let i = 0; i < 20; i++) {
+          const heart = document.createElement("div");
+          heart.className = "mini-heart";
+          heart.textContent =
+            heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+          heart.style.left = "50%";
+          heart.style.top = "50%";
+
+          const angle = (i / 20) * Math.PI * 2;
+          const distance = 100 + Math.random() * 100;
+          heart.style.setProperty("--x", Math.cos(angle) * distance + "px");
+          heart.style.setProperty("--y", Math.sin(angle) * distance + "px");
+          heart.style.animationDelay = Math.random() * 0.5 + "s";
+
+          floatingHearts.appendChild(heart);
+
+          setTimeout(() => heart.remove(), 3000);
+        }
+      }
+
+      // Touch interactions for mobile
+      let touchStartY = 0;
+      document.addEventListener("touchstart", function (e) {
+        touchStartY = e.touches[0].clientY;
+      });
+
+      document.addEventListener("touchend", function (e) {
+        const touchEndY = e.changedTouches[0].clientY;
+        const diff = touchStartY - touchEndY;
+
+        // Swipe up creates fireworks
+        if (diff > 80) {
+          createFireworks();
+        }
+
+        // Swipe down creates heart explosion
+        if (diff < -80) {
+          createHeartExplosion();
+        }
+      });
+
+      // Keyboard shortcuts
+      document.addEventListener("keydown", function (e) {
+        switch (e.key) {
+          case " ": // Spacebar
+            e.preventDefault();
+            createFireworks();
+            break;
+          case "Enter":
+            const activeBtn = document.querySelector(
+              ".control-btn.active:not(:disabled)"
+            );
+            if (activeBtn) {
+              activeBtn.click();
+            }
+            break;
+          case "h": // H key for hearts
+            createHeartExplosion();
+            break;
+        }
+      });
+
+      // Auto-play mode (press 'a' to activate)
+      let autoPlay = false;
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "a" || e.key === "A") {
+          autoPlay = !autoPlay;
+          if (autoPlay) {
+            autoAdvance();
+          }
+        }
+      });
+
+      function autoAdvance() {
+        if (!autoPlay) return;
+
+        const activeBtn = document.querySelector(
+          ".control-btn.active:not(:disabled)"
+        );
+        if (activeBtn) {
+          activeBtn.click();
+          setTimeout(autoAdvance, 4000);
+        }
+      }
+
+      // Add some CSS animations dynamically
+      const dynamicStyles = document.createElement("style");
+      dynamicStyles.textContent = `
+            @keyframes bounceIn {
+                0% { transform: scale(0) rotate(-180deg); opacity: 0; }
+                50% { transform: scale(1.2) rotate(-90deg); opacity: 1; }
+                100% { transform: scale(1) rotate(0deg); opacity: 1; }
+            }
+        `;
+      document.head.appendChild(dynamicStyles);
+    </script>
+  </body>
+</html>
