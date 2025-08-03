@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>🎂 Mom's Special Day 🎂</title>
+    <title>🎂 Mummy's Special Day 🎂</title>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&family=Poppins:wght@300;400;500;600;700&display=swap");
 
@@ -786,7 +786,7 @@
     <div class="splash-screen" id="splashScreen">
       <h1 class="splash-title">🎉 Surprise! 🎉</h1>
       <p class="splash-subtitle">
-        Something magical is coming for the most amazing mom...
+        Something magical is coming for the most amazing Mummy...
       </p>
     </div>
 
@@ -808,7 +808,7 @@
     <div class="main-container" id="mainContainer">
       <!-- Header -->
       <div class="header-section" id="headerSection">
-        <h1 class="birthday-title">Happy Birthday Mom!</h1>
+        <h1 class="birthday-title">Happy Birthday Mummy!</h1>
         <p class="birthday-subtitle">🌟 You make every day brighter! 🌟</p>
       </div>
 
@@ -831,8 +831,8 @@
         <div class="gift-box" data-gift="flowers">
           <div class="gift-icon">🌺</div>
           <div class="gift-photo">
-            <img src="images/3.jpg" alt="Special Moments">
-            <p class="photo-caption">Special Moments</p>
+            <img src="images/3.jpg" alt="Special Mummyents">
+            <p class="photo-caption">Special Mummyents</p>
           </div>
         </div>
         <div class="gift-box" data-gift="vacation">
@@ -874,7 +874,7 @@
           </div>
           <div class="photo-frame">
             <div class="photo-placeholder">🌹</div>
-            <p class="photo-caption">Special Moments</p>
+            <p class="photo-caption">Special Mummyents</p>
           </div>
           <div class="photo-frame">
             <div class="photo-placeholder">💕</div>
@@ -892,8 +892,8 @@
         <p class="photo-caption">Birthday Celebrations</p>
     </div>
     <div class="photo-frame">
-        <img src="images/3.jpg" alt="Special Moments" class="photo-image">
-        <p class="photo-caption">Special Moments</p>
+        <img src="images/3.jpg" alt="Special Mummyents" class="photo-image">
+        <p class="photo-caption">Special Mummyents</p>
     </div>
     <div class="photo-frame">
         <img src="images/4.jpg" alt="Love & Laughter" class="photo-image">
@@ -908,8 +908,8 @@
         <p class="photo-caption">Happy Times</p>
     </div>
     <div class="photo-frame">
-        <img src="images/7.jpg" alt="Sweet Moments" class="photo-image">
-        <p class="photo-caption">Sweet Moments</p>
+        <img src="images/7.jpg" alt="Sweet Mummyents" class="photo-image">
+        <p class="photo-caption">Sweet Mummyents</p>
     </div>
     <div class="photo-frame">
         <img src="images/8.jpg" alt="Cherished Times" class="photo-image">
@@ -930,6 +930,11 @@
     </div><div class="photo-frame">
         <img src="images/13.jpg" alt="Cherished Times" class="photo-image">
         <p class="photo-caption">Cherished Times</p>
+       
+    </div><div class="photo-frame">
+        <img src="images/15.jpg" alt="Cherished Times" class="photo-image">
+        <p class="photo-caption">Cherished Times</p>        
+    </div>
     
 </div>
       </div>
@@ -943,24 +948,32 @@
       </div>
 
       <!-- Special message -->
-      <div class="message-container" id="messageContainer">
-        <div class="message-card">
-          <p class="message-text">Dear Mom,</p>
-          <p class="message-text">
-            Today we celebrate YOU - the most wonderful person in our lives!
-          </p>
-          <p class="message-text">
-            Your love, warmth, and endless hugs make every day special.
-          </p>
-          <p class="message-text">
-            Thank you for being our superhero, our guide, and our best friend.
-          </p>
-          <p class="message-text">
-            May this new year bring you all the happiness you deserve!
-          </p>
-          <p class="message-text">We love you more than words can say! 💕</p>
-        </div>
-      </div>
+    <div class="message-container" id="messageContainer">
+  <div class="message-card">
+    <p class="message-text">Dear Mummy,</p>
+    <p class="message-text">
+      Today is your special day—a day to celebrate the most loving, caring, and wonderful woman in our lives.
+    </p>
+    <p class="message-text">
+      You’ve been my friend, our guiding light, and the heart of our family.  
+    </p>
+    <p class="message-text">
+      Every laugh we share, every problem you help me solve, and every hug you give—it all means the world to me.  
+    </p>
+    <p class="message-text">
+      And not just for me, but for Dad too. You make our home warm, happy, and full of love.  
+    </p>
+    <p class="message-text">
+      Thank you for being our strength, our joy, and the glue that holds us together.  
+    </p>
+    <p class="message-text">
+      We are so lucky to have you. May this year bring you as much happiness as you’ve given us.  
+    </p>
+    <p class="message-text">
+      We love you more than words can say. Happy Birthday, Mummy! ❤️  
+    </p>
+  </div>
+</div>
     </div>
 
     <!-- Control panel -->
@@ -1053,18 +1066,28 @@
       }, 3500);
 
       // Step 1: Start the magic
-      document
-        .getElementById("startBtn")
-        .addEventListener("click", function () {
-          document.getElementById("audioVisualizer").classList.add("playing");
-          document.body.style.animation =
-            "rainbowShift 3s ease-in-out infinite";
-          musicPlaying = true;
+      // Step 1: Start the magic
+document.getElementById("startBtn").addEventListener("click", function () {
+    // Play the birthday song
+    const birthdaySong = document.getElementById("birthdaySong");
+    birthdaySong.play().catch(e => console.log("Autoplay prevented:", e));
+    
+    document.getElementById("audioVisualizer").classList.add("playing");
+    document.body.style.animation = "rainbowShift 3s ease-in-out infinite";
+    musicPlaying = true;
 
-          this.disabled = true;
-          this.style.background = "linear-gradient(45deg, #06ffa5, #4cc9f0)";
-          showNextButton();
-        });
+    this.disabled = true;
+    this.style.background = "linear-gradient(45deg, #06ffa5, #4cc9f0)";
+    showNextButton();
+});
+
+// Handle autoplay restrictions
+document.addEventListener('click', function() {
+    const birthdaySong = document.getElementById("birthdaySong");
+    if (musicPlaying && birthdaySong.paused) {
+        birthdaySong.play().catch(e => console.log("Playback error:", e));
+    }
+}, { once: true });
 
       // Step 2: Grand reveal
       document
@@ -1210,7 +1233,7 @@
           // Show celebration alert
           setTimeout(() => {
             alert(
-              "🎉 HAPPY BIRTHDAY MOM! 🎉\n\nYou are the most amazing person in the world!\nWe love you so much! 💖✨"
+              "🎉 HAPPY BIRTHDAY Mummy! 🎉\n\nYou are the most amazing person in the world!\nWe love you so much! 💖✨"
             );
           }, 2000);
 
@@ -1428,5 +1451,10 @@
 
       // [Rest of the JavaScript remains the same]
     </script>
+    <!-- Audio element for birthday song (hidden) -->
+<audio id="birthdaySong" loop>
+    <source src="mummy.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
   </body>
 </html>
